@@ -1,0 +1,19 @@
+---
+
+ohmyzsh_users: []
+ohmyzsh_theme: 'robbyrussell'
+
+ohmyzsh_plugins:
+  - git
+  - rails
+  - ruby
+  - ssh-agent
+  - vagrant
+  - bundle
+  - cp
+  - comand-not-found
+  - git-extras
+  - gnu-utils
+  - history
+
+ohmyzsh_ssh_ids: []
