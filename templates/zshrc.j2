@@ -46,12 +46,17 @@ plugins=({{ ohmyzsh_plugins|join(' ') }})
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+export PATH=$HOME/.local/bin:$PATH
 
 export EDITOR=vim
 export SHELL=zsh
 export LC_TYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
+
+# Load aliases
+if [ -f $HOME/.zshrc-aliases ]; then
+  source $HOME/.zshrc-aliases
+fi
 
 # Load rbenv if present
 if [ -f /etc/profile.d/rbenv.sh ]; then

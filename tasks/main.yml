@@ -6,7 +6,7 @@
     - ohmyzsh
 
 - name: Clone oh-my-zsh repo
-  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=/home/{{ item }}/.oh-my-zsh
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=/home/{{ item }}/.oh-my-zsh force=yes
   sudo_user: "{{ item }}"
   with_items: ohmyzsh_users
   tags:
@@ -20,6 +20,13 @@
 
 - name: Copy default config
   template: src=zshrc.j2 dest=/home/{{ item }}/.zshrc mode=644
+  sudo_user: "{{ item }}"
+  with_items: ohmyzsh_users
+  tags:
+    - ohmyzsh
+
+- name: Copy default aliases
+  template: src=zshrc-aliases.j2 dest=/home/{{ item }}/.zshrc-aliases mode=644
   sudo_user: "{{ item }}"
   with_items: ohmyzsh_users
   tags:
