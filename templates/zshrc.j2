@@ -58,11 +58,6 @@ if [ -f $HOME/.zshrc-aliases ]; then
   source $HOME/.zshrc-aliases
 fi
 
-# Load rbenv if present
-if [ -f /etc/profile.d/rbenv.sh ]; then
-  source /etc/profile.d/rbenv.sh
-fi
-
 # Load Rails environment variables if present
 if [ -f $HOME/.rails.env ]; then
   source $HOME/.rails.env

@@ -32,6 +32,11 @@
   tags:
     - ohmyzsh
 
+- name: Setup /etc/profile for zsh
+  template: src=zprofile.j2 dest=/etc/zsh/zprofile mode=0644 owner=root group=root
+  tags:
+    - ohmyzsh
+
 - name: Set zsh as default shell
   user: name={{ item }} shell=/bin/zsh
   with_items: ohmyzsh_users
