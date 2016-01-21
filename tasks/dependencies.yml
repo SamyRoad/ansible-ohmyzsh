@@ -1,0 +1,8 @@
+---
+- name: Install zsh dependencies
+  apt: name={{ item }} state=latest
+  with_items:
+    - zsh
+    - git
+  tags:
+    - ohmyzsh

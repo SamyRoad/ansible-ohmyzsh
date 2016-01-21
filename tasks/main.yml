@@ -1,44 +1,5 @@
 ---
-
-- name: Install zsh
-  apt: name=zsh state=latest
-  tags:
-    - ohmyzsh
-
-- name: Clone oh-my-zsh repo
-  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=/home/{{ item }}/.oh-my-zsh force=yes
-  sudo_user: "{{ item }}"
-  with_items: ohmyzsh_users
-  tags:
-    - ohmyzsh
-
-- name: Copy custom theme
-  copy: src=samyroad.zsh-theme dest=/home/{{ item }}/.oh-my-zsh/themes/samyroad.zsh-theme owner={{ item }} group={{ item }} mode=0644
-  with_items: ohmyzsh_users
-  tags:
-    - ohmyzsh
-
-- name: Copy default config
-  template: src=zshrc.j2 dest=/home/{{ item }}/.zshrc mode=644
-  sudo_user: "{{ item }}"
-  with_items: ohmyzsh_users
-  tags:
-    - ohmyzsh
-
-- name: Copy default aliases
-  template: src=zshrc-aliases.j2 dest=/home/{{ item }}/.zshrc-aliases mode=644
-  sudo_user: "{{ item }}"
-  with_items: ohmyzsh_users
-  tags:
-    - ohmyzsh
-
-- name: Setup /etc/profile for zsh
-  template: src=zprofile.j2 dest=/etc/zsh/zprofile mode=0644 owner=root group=root
-  tags:
-    - ohmyzsh
-
-- name: Set zsh as default shell
-  user: name={{ item }} shell=/bin/zsh
-  with_items: ohmyzsh_users
-  tags:
-    - ohmyzsh
+- include: dependencies.yml
+- include: install.yml
+- include: users.yml
+  when: ohmyzsh_users | length > 0

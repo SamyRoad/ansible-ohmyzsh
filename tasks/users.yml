@@ -1,0 +1,48 @@
+---
+- name: Copy default zshrc in user's home
+  template:
+    src: zshrc.j2
+    dest: "{{ '/root' if item.user == 'root' else '/home/' ~ item.user }}/.zshrc"
+    mode: 0644
+  become_user: "{{ item.user }}"
+  when: item.state is not defined or item.state == "present"
+  with_items: ohmyzsh_users
+  tags:
+    - ohmyzsh
+
+- name: Create directory structure
+  file:
+    path: "{{ '/root' if item.user == 'root' else '/home/' ~ item.user }}/.zsh"
+    state: directory
+    recurse: yes
+  become_user: "{{ item.user }}"
+  when: item.state is not defined or item.state == "present"
+  with_items: ohmyzsh_users
+  tags:
+    - ohmyzsh
+
+- name: Copy default aliases
+  template:
+    src: zshrc/aliases.j2
+    dest: "{{ '/root' if item.user == 'root' else '/home/' ~ item.user }}/.zsh/aliases"
+    mode: 0644
+  become_user: "{{ item.user }}"
+  when: item.state is not defined or item.state == "present"
+  with_items: ohmyzsh_users
+  tags:
+    - ohmyzsh
+
+- name: Set zsh as default shell
+  user: name={{ item.user }} shell=/bin/zsh
+  when: item.state is not defined or item.state == "present"
+  with_items: ohmyzsh_users
+  tags:
+    - ohmyzsh
+
+
+- name: Set bash as default shell for uninstalled users
+  user: name={{ item.user }} shell=/bin/bash
+  when: item.state is defined and item.state == "absent"
+  with_items: ohmyzsh_users
+  tags:
+    - ohmyzsh

@@ -1,0 +1,26 @@
+---
+- name: Clone oh-my-zsh repo
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: "{{ ohmyzsh_install_dir }}"
+    update: yes
+  tags:
+    - ohmyzsh
+
+- name: Copy custom theme
+  copy:
+    src: samyroad.zsh-theme
+    dest: "{{ ohmyzsh_install_dir }}/themes/samyroad.zsh-theme"
+    mode: 0644
+  tags:
+    - ohmyzsh
+
+- name: Setup /etc/profile for zsh
+  template:
+    src: zprofile.j2
+    dest: /etc/zsh/zprofile
+    mode: 0644
+    owner: root
+    group: root
+  tags:
+    - ohmyzsh
