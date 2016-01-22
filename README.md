@@ -1,6 +1,6 @@
 # Zsh and Oh my Zsh
 
-  [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-ohmyzsh-blue.svg)](https://galaxy.ansible.com/list#/roles/6323)
+  [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-ohmyzsh-blue.svg)](https://galaxy.ansible.com/list#/roles/7152)
 
   Installs and configures zsh and oh-my-zsh plugin.
 
