@@ -28,7 +28,7 @@
   A list of users to install zsh and oh-my-zsh. Users myst exists beforehand.
   ```yaml
   ohmyzsh_users:
-    - name: mmacia                # Required.
+    - user: mmacia                # Required.
       state: present              # present or absent. Use absent to return to bash shell.
       theme: robbyrussell         # Preferred theme to use. This variable overrides `ohmyzsh_default_theme`
       ssh_ids:                    # List of SSH ids to add to ohmyzsh ssh manager plugin
